@@ -3,35 +3,6 @@ import Registry from "@dashkite/helium"
 import Storage from "@dashkite/addison"
 import Observable from "@dashkite/observable"
 
-class WrappedObservable
-  
-  @make: ( target, { wrap, unwrap }) ->
-    Object.assign ( new @ ), { target, wrap, unwrap }
-
-  get: -> @wrap @target.get()
-
-  set: ( value ) -> @target.set @unwrap value
-
-  plan: ( mutator, priority ) ->
-    _mutator = ( data ) => mutator @wrap data
-    @target.plan _mutator, priority
-
-  abort: -> @target.abort()
-  
-  commit: -> @target.commit()
-
-  update: ( mutator ) -> @target.update mutator
-      
-  observe: ( handler ) -> 
-    _handler = ( data ) => handler @wrap data
-    @target.observe _handler
-
-  cancel: ( handler ) -> @target.cancel handler
-
-  push: -> @target.push handler
-
-  pop: -> @wrap @target.pop()
-
 Halstead =
 
   persist: ( key, { wrap, unwrap, empty }) ->
@@ -39,15 +10,19 @@ Halstead =
     wrap ?= identity
     unwrap ?= identity
 
-    value = if ( Storage.has key ) then ( Storage.get key ) else empty
+    do ({ clone, _value, observable } = {}) ->
 
-    observable = Observable.from value
+      clone = ( value ) -> wrap structuredClone unwrap value
+
+      _value = if ( Storage.has key ) then ( Storage.get key ) else empty
+
+      value = wrap _value
+
+      observable = Observable.from value, { clone }
+        
+      observable.observe ( value ) -> Storage.set key, unwrap value
       
-    observable.observe ( value ) -> Storage.set key, value
-
-    wrapper = WrappedObservable.make observable, { wrap, unwrap }
-    
-    Registry.set key, wrapper
+      Registry.set key, observable
 
 
 export default Halstead
