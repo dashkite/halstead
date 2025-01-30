@@ -11,6 +11,12 @@ importers:
       '@dashkite/addison':
         specifier: link:../addison
         version: link:../addison
+      '@dashkite/belmont':
+        specifier: link:../belmont
+        version: link:../belmont
+      '@dashkite/generic':
+        specifier: link:../generic
+        version: link:../generic
       '@dashkite/helium':
         specifier: link:../helium
         version: link:../helium
@@ -20,6 +26,9 @@ importers:
       '@dashkite/observable':
         specifier: link:../observable
         version: link:../observable
+      '@dashkite/reactive':
+        specifier: link:../reactive
+        version: link:../reactive
     devDependencies:
       '@dashkite/amen':
         specifier: ^0.2.0
@@ -42,6 +51,9 @@ importers:
       '@dashkite/genie-module':
         specifier: link:../genie-module
         version: link:../genie-module
+      '@dashkite/genie-yaml':
+        specifier: link:../genie-yaml
+        version: link:../genie-yaml
 
 packages:
 

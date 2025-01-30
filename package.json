@@ -19,10 +19,10 @@
   ],
   "exports": {
     ".": {
-      "browser": "./build/browser/src/index.js"
+      "browser": "./build/browser/src/index.js",
+      "node": "./build/node/src/index.js"
     }
   },
-  "main": "build/browser/src/index.js",
   "files": [
     "build/browser/src"
   ],
@@ -37,12 +37,16 @@
     "@dashkite/genie": "link:../genie",
     "@dashkite/genie-clean": "link:../genie-clean",
     "@dashkite/genie-coffee": "link:../genie-coffee",
-    "@dashkite/genie-module": "link:../genie-module"
+    "@dashkite/genie-module": "link:../genie-module",
+    "@dashkite/genie-yaml": "link:../genie-yaml"
   },
   "dependencies": {
     "@dashkite/addison": "link:../addison",
+    "@dashkite/belmont": "link:../belmont",
+    "@dashkite/generic": "link:../generic",
     "@dashkite/helium": "link:../helium",
     "@dashkite/joy": "link:../joy",
-    "@dashkite/observable": "link:../observable"
+    "@dashkite/observable": "link:../observable",
+    "@dashkite/reactive": "link:../reactive"
   }
 }

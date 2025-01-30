@@ -1,28 +1,37 @@
-import { identity } from "@dashkite/joy/function"
-import Registry from "@dashkite/helium"
-import Storage from "@dashkite/addison"
-import Observable from "@dashkite/observable"
+import Generic from "@dashkite/generic"
+import Addison from "@dashkite/addison"
+import EventReactor from "@dashkite/reactive/event-reactor"
+import Provider from "@dashkite/belmont/provider"
 
-Halstead =
+class Errors
 
-  persist: ( key, { wrap, unwrap, empty }) ->
+  @make: ( name ) ->
+    new Error "Halstead: #{ name }"
 
-    wrap ?= identity
-    unwrap ?= identity
+class Halstead extends Provider
 
-    do ({ clone, _value, observable } = {}) ->
+  get: ->
+    self = @
+    EventReactor.from do ->
+      if ( value = Addison.get self.url )?
+        yield name: "value", value: Addison.get self.url
+      else
+        yield name: "failure", error: Errors.make "not found"
 
-      clone = ( value ) -> wrap structuredClone unwrap value
+  put: do ->
+ 
+    ( Generic.make "Halstead.put" )
 
-      _value = if ( Storage.has key ) then ( Storage.get key ) else empty
+      .define [( -> true )], ( value ) ->
+        self = @
+        EventReactor.from do ->
+          Addison.set self.url, value
+          self.dispatch { name: "update", value  }
+          yield name: "success"
 
-      value = wrap _value
-
-      observable = Observable.from value, { clone }
-        
-      observable.observe ( value ) -> Storage.set key, unwrap value
-      
-      Registry.set key, observable
-
+      .define [ Function ], ( mutator ) ->
+        self = @
+        EventReactor.from do ->
+          yield from await self.put ( await mutator Addison.get self.url )
 
 export default Halstead
