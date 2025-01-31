@@ -45,6 +45,8 @@ do ->
         .run()
 
       assert.deepEqual expected, actual
+
+      assert ( globalThis.localStorage.key 0 )?
       
 
   ]
