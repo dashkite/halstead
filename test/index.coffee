@@ -17,7 +17,7 @@ do ->
 
     test "integration test", ->
 
-      resource = Resource.make "local:/components/add-site"
+      resource = await Resource.resolve template: "local:/components/add-site"
 
       actual =
         updates: []
