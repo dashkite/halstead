@@ -8,13 +8,18 @@ class Errors
   @make: ( name ) ->
     new Error "Halstead: #{ name }"
 
+# Chicago protocol requires methods return reactors (not iterators)
+# so the reactor functions start with `await true`
+
 class Halstead extends Provider
 
   get: ->
     self = @
     EventReactor.from do ->
+      await true
       if ( value = Addison.get self.url )?
         yield name: "value", value: Addison.get self.url
+        yield name: "succss"
       else
         yield name: "failure", error: Errors.make "not found"
 
@@ -25,9 +30,11 @@ class Halstead extends Provider
       .define [( -> true )], ( value ) ->
         self = @
         EventReactor.from do ->
+          await true
           Addison.set self.url, value
           self.dispatch { name: "update", value  }
           yield name: "success"
+          yield { name: "value", value }
 
       .define [ Function ], ( mutator ) ->
         self = @
