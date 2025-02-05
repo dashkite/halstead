@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@dashkite/addison':
-        specifier: link:../addison
-        version: link:../addison
       '@dashkite/belmont':
         specifier: link:../belmont
         version: link:../belmont
@@ -29,6 +26,9 @@ importers:
       '@dashkite/reactive':
         specifier: link:../reactive
         version: link:../reactive
+      '@dashkite/storage':
+        specifier: link:../storage
+        version: link:../storage
     devDependencies:
       '@dashkite/amen':
         specifier: ^0.2.0

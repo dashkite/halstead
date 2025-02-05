@@ -41,7 +41,7 @@
     "@dashkite/genie-yaml": "link:../genie-yaml"
   },
   "dependencies": {
-    "@dashkite/addison": "link:../addison",
+    "@dashkite/storage": "link:../storage",
     "@dashkite/belmont": "link:../belmont",
     "@dashkite/generic": "link:../generic",
     "@dashkite/helium": "link:../helium",
