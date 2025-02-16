@@ -9,7 +9,7 @@ class Halstead extends Provider
     self = @
     EventReactor.from do ->
       if ( value = Storage.get self.url )?
-        yield name: "succss"
+        yield name: "success"
         yield { name: "value", value }
       else
         yield 
