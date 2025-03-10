@@ -2,6 +2,8 @@ import assert from "@dashkite/assert"
 import {test, success} from "@dashkite/amen"
 import print from "@dashkite/amen-console"
 
+import * as Val from "@dashkite/joy/value"
+
 import Halstead from "../src"
 
 import expected from "./expected"
@@ -19,33 +21,21 @@ do ->
 
       resource = await Resource.resolve template: "local:/components/add-site"
 
-      actual =
-        updates: []
-        put: []
-        get: []
+      actual = []
 
+      do ->
+        for await request from resource.subscribe()
+          for await event from request.reactor
+            switch event.name
+              when "value" then actual.push event.value
 
-      resource
-        .observe()
-        .when "update", ({ value }) -> actual.updates.push value
-        .run()
+      await resource.put "hello, world"
 
-      await resource
-        .put "hello, world"
-        .when "success", -> actual.put.push "hello, world!"
-        .run()
+      await resource.get()
 
-      await resource
-        .get()
-        .when "value", ({ value }) -> actual.get.push value
-        .run()
+      await resource.put "goodbye!"
 
-      await resource
-        .put -> "goodbye!"
-        .run()
-
-      assert.deepEqual expected, actual
-
+      await assert.expect -> Val.equal expected, actual
 
       assert ( globalThis.localStorage.key 0 )?
       
