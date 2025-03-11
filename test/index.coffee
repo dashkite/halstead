@@ -24,10 +24,9 @@ do ->
       actual = []
 
       do ->
-        for await request from resource.subscribe()
-          for await event from request.reactor
-            switch event.name
-              when "value" then actual.push event.value
+        for await event from resource.subscribe()
+          switch event.name
+            when "value" then actual.push event.value
 
       await resource.put "hello, world"
 

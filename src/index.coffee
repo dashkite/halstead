@@ -6,49 +6,35 @@ import Provider from "@dashkite/belmont/provider"
 class Halstead extends Provider
 
   get: ->
-    self = @
-    @publish
-      method: "get"
-      url: @url
-      reactor: do -> 
-        if ( value = Storage.get self.url )?
-          yield { name: "value", value }
-        else
-          yield 
-            name: "failure"
-            error: new Error "halstead: [ #{ self.url } ] not found"
+    if ( value = Storage.get @url )?
+      @publish { name: "value", value }
+    else
+      @publish 
+        name: "failure"
+        error: new Error "halstead: [ #{ @url } ] not found"
+      @publish 
+        name: "not found"
+        url: @url
 
   put: ( value ) ->
-    self  = @
-    @publish
-      method: "put"
-      url: @url
-      reactor: do ->
-        Storage.set self.url, value
-        yield { name: "value", value }
+    Storage.set @url, value
+    @publish { name: "value", value }
 
   delete: ->
-    self = @
-    @publish 
-      method: "delete"
-      url: @url
-      reactor: do ->
-        if ( Storage.get self.url )?
-          Storage.remove self.url
-          yield name: "deleted"
-        else
-          yield
-            name: "failure"
-            error: new Error "halstead: [ #{ self.url } ] not found"
+    if ( Storage.get @url )?
+      Storage.remove @url
+      @publish name: "deleted"
+    else
+      @publish 
+        name: "failure"
+        error: new Error "halstead: [ #{ @url } ] not found"
+      @publish 
+        name: "not found"
+        url: @url
 
   post: ->
-    self = @
-    @publish 
-      method: "post"
-      url: @url
-      reactor: do ->
-        yield
-          name: "failure"
-          error: new Error "halstead: [ #{ self.url } ] unsupported method"
+    @publish
+      name: "failure"
+      error: new Error "halstead: [ #{ @url } ] unsupported method"
 
 export default Halstead
