@@ -15,8 +15,8 @@ importers:
         specifier: link:../generic
         version: link:../generic
       '@dashkite/helium':
-        specifier: link:../helium
-        version: link:../helium
+        specifier: 0.5.0
+        version: 0.5.0
       '@dashkite/joy':
         specifier: link:../joy
         version: link:../joy
@@ -627,11 +627,17 @@ packages:
     engines: {node: '>=20.0.0'}
     hasBin: true
 
+  '@dashkite/helium@0.5.0':
+    resolution: {integrity: sha512-G+TMDulM78QLzm/xtos6w3n7dPZTKCGtkv8hIHhyQYxSSHcPtQ3r24PbEc8Us4UkHPkzw5nkCtXWq33ixfiXuw==}
+
   '@dashkite/joy@0.3.16':
     resolution: {integrity: sha512-dsU0us4j1Pb+zceoBvLbnZ2PbmULkJUtM2vtWLxKmoc1DE4w9SVTiPTe6JWvF0A0vk90ldv+Lc9qEA5x3O+DtQ==}
 
   '@dashkite/kaiko@0.3.3':
     resolution: {integrity: sha512-XnAvVr9y2MsDqMLr4A24vkLF7Iuq3E8RjHEEpqhe29P5NevVX9jXKcXUStNMp9MSJbjHd2pqUNiM5Vvdja9ggg==}
+
+  '@dashkite/katana@0.4.8':
+    resolution: {integrity: sha512-KOfMS5aRZItxPeMv0OXbOTCj5BZhN9jM190jae8HB7WgGB5uM5jEzRWmyh3yVbxTaL83o7csktRzUkxkr/Op1A==}
 
   '@dashkite/masonry-coffee@0.2.0':
     resolution: {integrity: sha512-xJO48SIRpsYbJF32CwpA6yeEJhNh+DtxCucyt4MNJqO0yru9X7hoxZsHneRoUE+kISD0KTO8DLQiHv21nU/V2A==}
@@ -2175,9 +2181,18 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
+  '@dashkite/helium@0.5.0':
+    dependencies:
+      '@dashkite/joy': 0.3.16
+      '@dashkite/katana': 0.4.8
+
   '@dashkite/joy@0.3.16': {}
 
   '@dashkite/kaiko@0.3.3': {}
+
+  '@dashkite/katana@0.4.8':
+    dependencies:
+      '@dashkite/joy': 0.3.16
 
   '@dashkite/masonry-coffee@0.2.0':
     dependencies:
