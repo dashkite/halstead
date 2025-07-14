@@ -21,8 +21,8 @@ importers:
         specifier: link:../joy
         version: link:../joy
       '@dashkite/observable':
-        specifier: link:../observable
-        version: link:../observable
+        specifier: 0.3.0
+        version: 0.3.0
       '@dashkite/reactive':
         specifier: link:../reactive
         version: link:../reactive
@@ -662,6 +662,9 @@ packages:
 
   '@dashkite/masonry@0.14.0':
     resolution: {integrity: sha512-5POHf/fpqgFba4Xbrr8oNHIpkKTD1WgFTZMjBZBvluv8YBWzLayAd9l4R0TYy+MybBVFFJ2Tj7v5DlIu6dPgvw==}
+
+  '@dashkite/observable@0.3.0':
+    resolution: {integrity: sha512-CCJ6xLylJWIpUT+04TAIIai1BUsvmriCEZVz9HJjIluG/TqMgZJ91fsuk4gBp8Sarl0pAviUCE+504Ic7e+6yQ==}
 
   '@dashkite/storage@0.3.0':
     resolution: {integrity: sha512-zn9iGlp6pAW6MYhyAzcBJHAMnNI7v9dInoV/RHfdzL9yocsL0Uo6/rtpDw+SobY4A++PwgjfOxXFyhEMXEd0BA==}
@@ -2247,6 +2250,10 @@ snapshots:
       fast-glob: 3.3.3
     transitivePeerDependencies:
       - supports-color
+
+  '@dashkite/observable@0.3.0':
+    dependencies:
+      '@dashkite/joy': 0.3.16
 
   '@dashkite/storage@0.3.0': {}
 
