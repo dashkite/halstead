@@ -27,8 +27,8 @@ importers:
         specifier: link:../reactive
         version: link:../reactive
       '@dashkite/storage':
-        specifier: link:../storage
-        version: link:../storage
+        specifier: 0.3.0
+        version: 0.3.0
     devDependencies:
       '@dashkite/amen':
         specifier: ^0.2.0
@@ -662,6 +662,9 @@ packages:
 
   '@dashkite/masonry@0.14.0':
     resolution: {integrity: sha512-5POHf/fpqgFba4Xbrr8oNHIpkKTD1WgFTZMjBZBvluv8YBWzLayAd9l4R0TYy+MybBVFFJ2Tj7v5DlIu6dPgvw==}
+
+  '@dashkite/storage@0.3.0':
+    resolution: {integrity: sha512-zn9iGlp6pAW6MYhyAzcBJHAMnNI7v9dInoV/RHfdzL9yocsL0Uo6/rtpDw+SobY4A++PwgjfOxXFyhEMXEd0BA==}
 
   '@dashkite/zephyr@0.2.0':
     resolution: {integrity: sha512-l3Fm9nyOIp1yBnv4IzGOKVgo1/UucU5WLvsqAfcP2jEVlE4AgpPkODssyloxTyC3N+bhcz1DXqC/7KokI1eVjA==}
@@ -2244,6 +2247,8 @@ snapshots:
       fast-glob: 3.3.3
     transitivePeerDependencies:
       - supports-color
+
+  '@dashkite/storage@0.3.0': {}
 
   '@dashkite/zephyr@0.2.0':
     dependencies:

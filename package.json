@@ -48,6 +48,6 @@
     "@dashkite/joy": "link:../joy",
     "@dashkite/observable": "link:../observable",
     "@dashkite/reactive": "link:../reactive",
-    "@dashkite/storage": "link:../storage"
+    "@dashkite/storage": "0.3.0"
   }
 }
