@@ -9,32 +9,20 @@ class Halstead extends Provider
     if ( value = Storage.get @url )?
       @publish { name: "value", value }
     else
-      @publish 
-        name: "failure"
-        error: new Error "halstead: [ #{ @url } ] not found"
-      @publish 
-        name: "not found"
-        url: @url
+      @publish { name: "not found", @url }
 
   put: ( value ) ->
     Storage.set @url, value
     @publish { name: "value", value }
 
   delete: ->
-    if ( Storage.get @url )?
-      Storage.remove @url
-      @publish name: "deleted"
-    else
-      @publish 
-        name: "failure"
-        error: new Error "halstead: [ #{ @url } ] not found"
-      @publish 
-        name: "not found"
-        url: @url
+    Storage.remove @url
+    @publish { name: "delete" }
 
-  post: ->
-    @publish
-      name: "failure"
-      error: new Error "halstead: [ #{ @url } ] unsupported method"
+  post: ( value ) ->
+    @publish 
+      name: "unsupported method"
+      url: @url
+      method: "post"
 
 export default Halstead
