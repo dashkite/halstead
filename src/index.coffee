@@ -9,7 +9,7 @@ class Halstead extends Provider
     if ( value = Storage.get @url )?
       @publish name: "value", scope: "resource", value: value
     else
-      @publish name: "not-found", url: @url
+      @publish name: "not-found", scope: "response", url: @url
 
   put: ( value ) ->
     exists = ( Storage.get @url )?
@@ -26,6 +26,7 @@ class Halstead extends Provider
   post: ( value ) ->
     @publish
       name: "method-not-allowed"
+      scope: "request"
       url: @url
       method: "post"
 
