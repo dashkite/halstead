@@ -7,21 +7,25 @@ class Halstead extends Provider
 
   get: ->
     if ( value = Storage.get @url )?
-      @publish { name: "value", value }
+      @publish name: "value", scope: "resource", value: value
     else
-      @publish { name: "not found", @url }
+      @publish name: "not-found", url: @url
 
   put: ( value ) ->
+    exists = ( Storage.get @url )?
     Storage.set @url, value
-    @publish { name: "value", value }
+    if exists
+      @publish name: "value", scope: "resource", value: value
+    else
+      @publish name: "created", scope: "resource", value: value
 
   delete: ->
     Storage.remove @url
-    @publish { name: "delete" }
+    @publish name: "delete", scope: "resource"
 
   post: ( value ) ->
-    @publish 
-      name: "unsupported method"
+    @publish
+      name: "method-not-allowed"
       url: @url
       method: "post"
 

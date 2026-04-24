@@ -1,44 +1,38 @@
 import assert from "@dashkite/assert"
 import {test, success} from "@dashkite/amen"
 import print from "@dashkite/amen-console"
-
-import * as Val from "@dashkite/joy/value"
-
-import Halstead from "../src"
-
-import expected from "./expected"
-
+import Storage from "@dashkite/storage"
 import Resource from "@dashkite/belmont"
-import Providers from "@dashkite/belmont/providers"
+import conformance from "@dashkite/belmont/test/conformance"
 
+# Add Halstead as a provider for local schemes
+import Halstead from "../src"
+import Providers from "@dashkite/belmont/providers"
 Providers.add "local", Halstead
-  
+
+generateAddress = -> Math.random().toString(36)[ 2.. ]
+
+factory =
+  existing: ->
+    url = "local://existing-#{ generateAddress() }"
+    Storage.set url, { title: "Existing", body: "I'm a teapot" }
+    resource = await Resource.resolve template: url
+    { resource }
+
+  missing: ->
+    url = "local://missing-#{ generateAddress() }"
+    Storage.remove url
+    resource = await Resource.resolve template: url
+    { resource }
+
+  unsupported: ->
+    resource = await Resource.resolve template: "local://anything"
+    { resource, method: "post" }
+
 do ->
 
   print await test "Halstead", [
-
-    test "integration test", ->
-
-      resource = await Resource.resolve template: "local:/components/add-site"
-
-      actual = []
-
-      do ->
-        for await event from resource.subscribe()
-          switch event.name
-            when "value" then actual.push event.value
-
-      await resource.put "hello, world"
-
-      await resource.get()
-
-      await resource.put "goodbye!"
-
-      await assert.expect -> Val.equal expected, actual
-
-      assert ( globalThis.localStorage.key 0 )?
-      
-
+    conformance factory
   ]
 
   process.exit if success then 0 else 1
