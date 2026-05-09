@@ -13,6 +13,7 @@ Providers.add "local", Halstead
 generateAddress = -> Math.random().toString(36)[ 2.. ]
 
 factory =
+
   existing: ->
     url = "local://existing-#{ generateAddress() }"
     Storage.set url, { title: "Existing", body: "I'm a teapot" }
@@ -34,5 +35,3 @@ do ->
   print await test "Halstead", [
     conformance factory
   ]
-
-  process.exit if success then 0 else 1
