@@ -1,6 +1,6 @@
 {
   "name": "@dashkite/halstead",
-  "version": "0.3.14",
+  "version": "0.3.28",
   "description": "Transparent `LocalStorage` persistence for observables",
   "keywords": [],
   "homepage": "https://github.com/dashkite/halstead#readme",
@@ -33,6 +33,7 @@
     "release": "genie release"
   },
   "devDependencies": {
+
     "@dashkite/amen": "0.5.0",
     "@dashkite/amen-console": "0.4.0",
     "@dashkite/assert": "0.3.0",
@@ -42,6 +43,7 @@
     "@dashkite/genie-module": "link:../genie-module",
     "@dashkite/genie-release": "0.5.0",
     "@dashkite/genie-yaml": "0.7.0"
+
   },
   "dependencies": {
     "@dashkite/belmont": "link:../belmont",
