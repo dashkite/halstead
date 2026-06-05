@@ -21,7 +21,7 @@ class Halstead extends Provider
 
   delete: ->
     Storage.remove @url
-    @publish name: "delete", scope: "resource"
+    @publish name: "deleted", scope: "resource"
 
   post: ( value ) ->
     @publish
