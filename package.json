@@ -1,6 +1,6 @@
 {
   "name": "@dashkite/halstead",
-  "version": "0.3.31",
+  "version": "0.3.32",
   "description": "Transparent `LocalStorage` persistence for observables",
   "keywords": [],
   "homepage": "https://github.com/dashkite/halstead#readme",
