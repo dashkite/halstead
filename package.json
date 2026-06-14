@@ -44,7 +44,7 @@
     "@dashkite/genie-yaml": "0.7.0"
   },
   "dependencies": {
-    "@dashkite/belmont": "link:../belmont",
+    "@dashkite/belmont": "^0.3.28",
     "@dashkite/generic": "0.5.0",
     "@dashkite/helium": "0.8.0",
     "@dashkite/joy": "0.12.40",
