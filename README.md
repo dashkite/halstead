@@ -4,44 +4,51 @@
 
 [![Hippocratic License HL3-CORE](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-CORE&labelColor=5e2751&color=bc8c3d)](https://firstdonoharm.dev/version/3/0/core.html)
 
-## Purpose
+Halstead is a Belmont provider that enables reactive `LocalStorage` persistence. It allows developers to store and retrieve resources directly from the browser's local storage utilizing a uniform, event-driven interface, deeply integrated with the Reactive Resource Model.
 
-Halstead is a Belmont provider for reactive `LocalStorage` persistence. It allows resources to be stored and retrieved from the browser's local storage using a uniform, event-driven interface.
+## Features
+
+- **Reactive Persistence:** Integrates with observables to provide real-time updates when data changes in `LocalStorage`.
+- **Belmont Integration:** Operates as a concrete resource provider for Belmont, abstracting `LocalStorage` behind standard resource operations.
+- **Event-Driven:** Emits lifecycle events such as `value`, `not-found`, `created`, and `deleted` for precise state management.
+- **Uniform Interface:** Normalizes local storage access through consistent `get`, `put`, and `delete` operations.
 
 ## Installation
 
-Use your favorite package manager to install `@dashkite/halstead`.
+```bash
+pnpm install @dashkite/halstead
+```
 
 ## Usage
 
-```coffee
+Register Halstead as a custom Belmont provider to manage local settings.
+
+```coffeescript
 import Providers from "@dashkite/belmont/providers"
 import Halstead from "@dashkite/halstead"
 import Resource from "@dashkite/belmont"
 
-# Register Halstead for a custom protocol, e.g., 'local'
+# Register Halstead for the 'local' protocol
 Providers.add "local", Halstead
 
 # Resolve a local resource
-# The URL will be something like 'local://settings'
 resource = await Resource.resolve
   template: "local://settings"
 
 resource.subscribe ({ name, value }) ->
   if name == "value"
-    console.log "Settings:", value
+    console.log "Settings loaded:", value
 
 # Retrieve from LocalStorage
 resource.get()
 
-# Save to LocalStorage
-resource.put { theme: "dark" }
+# Save a new value to LocalStorage
+resource.put theme: "dark"
 ```
 
 ## Other Resources
 
 - [Reference](docs/reference.md)
-
-## Status
-
-Not suitable for production use. Please report bugs and feature requests via the issue tracker.
+- [Recipes](docs/recipes.md)
+- [Technical Notes](docs/technical-notes.md)
+- [Testing](docs/testing.md)
